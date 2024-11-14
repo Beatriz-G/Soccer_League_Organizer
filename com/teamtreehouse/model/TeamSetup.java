@@ -62,7 +62,6 @@ public class TeamSetup {
                     case "create":
                         Team team = promptNewTeam();
                         mAllTeams.addTeam(team);
-                        // mAllTeams.AllTeam(team);
                         System.out.printf("Team %s coached by %s has been added. %n%n", team.getTeamName(), team.getTeamCoach());
                     break;
                     case "add":
@@ -80,11 +79,6 @@ public class TeamSetup {
             }
         } while (!choice.equals("quit"));
     }
-
-
-
-
-
 
 
     // Add an existing player

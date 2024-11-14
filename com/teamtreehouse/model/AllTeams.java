@@ -9,7 +9,11 @@ public class AllTeams {
         mTeam = new HashSet<>();
     }
 
+    /*private List<Team> mTeam;
 
+    public AllTeams() {
+        mTeam = new ArrayList<>();
+    }*/
 
     public List<Team> getTeams(String player) {
         List<Team> list = new ArrayList<>(mTeam);
@@ -17,17 +21,16 @@ public class AllTeams {
         return list;
     }
 
+    // shows list of players
     public void addTeam(Team team) {
         mTeam.add(team);
+        System.out.printf("All saved teams: %n");
+        for (Team savedTeam : mTeam) {
+            System.out.printf("Team name: %s -- Coach Name %s %n%n", savedTeam.getTeamName(), savedTeam.getTeamCoach());
+        }
     }
-    /*public void mAllTeam(Team team) {
-        //mTeam.allTeam(team);
 
-    }
-    */
     public int getPlayers() {
-
-
         return 0;
     }
 
