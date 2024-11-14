@@ -17,6 +17,10 @@ public class Player implements Comparable<Player>, Serializable {
     this.previousExperience = previousExperience;
   }
 
+  public static String getPlayer() {
+    return getPlayer();
+  }
+
   public String getFirstName() {
     return firstName;
   }

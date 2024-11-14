@@ -69,9 +69,6 @@ public class TeamSetup {
                         String teamPlayer = promptPlayer();
 
 
-                        //
-                        //String teamPlayer = promptPlayer();
-
                 }
             } catch (IOException ioe) {
                 System.out.println("Problem with input");
@@ -88,14 +85,20 @@ public class TeamSetup {
         int index = promptForIndex(mPlayers);
         return mPlayers.get(index);
     }
-/*
+
    private Team promptPlayerforTeam(String player) throws IOException {
         List<Team> teams = mAllTeams.getTeams(player);
+        List<String> playerNames = new ArrayList<>();
+        for (Team team : teams) {
+            playerNames.add(team.getTeamName());
+        }
+        System.out.printf("Available players: %s", player);
+        int index = promptForIndex(playerNames);
+        return teams.get(index);
 
-
-        return null;
+        //return null;
     }
-*/
+
     private static int promptForIndex(List<String> players) throws IOException {
         int counter = 1;
         for (String option : players) {
@@ -107,13 +110,4 @@ public class TeamSetup {
         int choice = Integer.parseInt(optionAsString.trim());
         return choice - 1;
     }
-
-
-
-
-
 }
-
-
-
-

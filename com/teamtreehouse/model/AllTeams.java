@@ -9,12 +9,6 @@ public class AllTeams {
         mTeam = new HashSet<>();
     }
 
-    /*private List<Team> mTeam;
-
-    public AllTeams() {
-        mTeam = new ArrayList<>();
-    }*/
-
     public List<Team> getTeams(String player) {
         List<Team> list = new ArrayList<>(mTeam);
         Collections.sort(list);
@@ -37,17 +31,35 @@ public class AllTeams {
     private Map<String, List<Player>> byPlayer() {
         Map<String, List<Player>> byPlayer = new TreeMap<>();
         for (Team team : mTeam) {
-            List<Player> playerPlayer = byPlayer.get(player.getPlayer());
+            List<Player> playerPlayer = byPlayer.get(Player.getPlayer());
             if(playerPlayer == null) {
                 playerPlayer = new ArrayList<>();
-                byPlayer.put(player.getPlayer(), playerPlayer);
+                byPlayer.put(Player.getPlayer(), playerPlayer);
             }
-            playerPlayer.add(player);
+            Player Player = null;
+            playerPlayer.add(Player);
         }
         return byPlayer;
     }
 
-   /* public List<Team> getPlayersforTeam(String playerName) {
+
+
+
+    /*
+    private Map<String, List<Player>> byPlayer() {
+        Map<String, List<Player>> byPlayer = new TreeMap<>();
+        for (Team team : mTeam) {
+            List<Player> playerPlayer = byPlayer.get(Player.getPlayer());
+            if(playerPlayer == null) {
+                playerPlayer = new ArrayList<>();
+                byPlayer.put(Player.getPlayer(), playerPlayer);
+            }
+            Player Player = null;
+            playerPlayer.add(Player);
+        }
+        return byPlayer;
+
+    public List<Team> getPlayersforTeam(String playerName) {
         List<Player> teams = byPlayer().get(playerName);
         teams.sort(new Comparator<Team>() {
 
@@ -62,5 +74,5 @@ public class AllTeams {
         return teams;
     }
 
-    */
+     */
 }
