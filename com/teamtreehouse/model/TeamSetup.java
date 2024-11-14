@@ -77,7 +77,6 @@ public class TeamSetup {
         } while (!choice.equals("quit"));
     }
 
-
     // Add an existing player
     private static String promptPlayer() throws IOException {
         System.out.println("Available Players: ");
@@ -95,8 +94,6 @@ public class TeamSetup {
         System.out.printf("Available players: %s", player);
         int index = promptForIndex(playerNames);
         return teams.get(index);
-
-        //return null;
     }
 
     private static int promptForIndex(List<String> players) throws IOException {
