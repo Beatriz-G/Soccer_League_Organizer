@@ -63,12 +63,12 @@ public class TeamSetup {
                 choice = promptAction();
                 switch (choice) {
                     case "create":
-                        String team = promptNewPlayer();
+                        Team team = promptNewPlayer();
                         AllTeams.allTeams(team);
                         System.out.printf("Team %s coached by %s has been added. %n%n", team.getTeamName(), team.getTeamCoach());
                     break;
                     case "add":
-                        String player = promptNewPlayer();
+                        Team player = promptNewPlayer();
                         mAllTeams.addAllTeams(team);
 
 
@@ -82,7 +82,7 @@ public class TeamSetup {
 }
 
 // Enter a new player
-private static String promptNewPlayer() throws IOException {
+private static Team promptNewPlayer() throws IOException {
     System.out.print("Enter the player's first name:    ");
     String firstName = mReader.readLine();
     System.out.print("Enter the player's last name:    ");
