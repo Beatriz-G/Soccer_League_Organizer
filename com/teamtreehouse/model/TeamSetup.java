@@ -1,26 +1,22 @@
-//package com.teamtreehouse.model;
-
-import com.teamtreehouse.model.Player;
-import com.teamtreehouse.model.Players;
-import com.teamtreehouse.model.Team;
-import com.teamtreehouse.model.AllTeams;
+package com.teamtreehouse.model;
 
 import java.util.*;
-
 
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class TeamSetup {
     private static Object mTeamName;
     private static Object mTeamCoach;
     private static AllTeams mAllTeams;
     private static BufferedReader mReader;
-    private static Map<String, String> mMenu;
-
     private List<Player> mPlayers;
-
+    private static Map<String, String> mMenu;
 
     public TeamSetup(AllTeams allTeams) {
         mAllTeams = allTeams;
@@ -63,15 +59,13 @@ public class TeamSetup {
                 choice = promptAction();
                 switch (choice) {
                     case "create":
-                        Team team = promptNewPlayer();
-                        AllTeams.allTeams(team);
+                        Team team = promptNewTeam();
+                        mAllTeams.allTeam(team);
                         System.out.printf("Team %s coached by %s has been added. %n%n", team.getTeamName(), team.getTeamCoach());
                     break;
                     case "add":
-                        Team player = promptNewPlayer();
-                        mAllTeams.addAllTeams(team);
-
-
+                        String player = promptPlayer();
+                        String teamPlayer = promptPlayer();
                 }
             } catch (IOException ioe) {
                 System.out.println("Problem with input");
@@ -79,17 +73,40 @@ public class TeamSetup {
             }
         } while (!choice.equals("quit"));
     }
+
+    // Add an existing player
+    private static String promptPlayer() throws IOException {
+        System.out.println("Available Players: ");
+        List<String> mPlayers = new ArrayList<>(mAllTeams.getPlayers());
+        int index = promptForIndex(mPlayers);
+        return mPlayers.get(index);
+    }
+
+   /* private Team promptPlayerforTeam(String player) throws IOException {
+        List<Team> teams = mAllTeams.getTeams(player);
+
+
+        return null;
+    }
+*/
+    private static int promptForIndex(List<String> players) throws IOException {
+        int counter = 1;
+        for (String option : players) {
+            System.out.printf("%d.) %s %n", counter, option);
+            counter++;
+        }
+        System.out.printf("Your pick:  ");
+        String optionAsString = mReader.readLine();
+        int choice = Integer.parseInt(optionAsString.trim());
+        return choice - 1;
+    }
+
+
+
+
+
 }
 
-// Enter a new player
-private static Team promptNewPlayer() throws IOException {
-    System.out.print("Enter the player's first name:    ");
-    String firstName = mReader.readLine();
-    System.out.print("Enter the player's last name:    ");
-    String lastName = mReader.readLine();
-    System.out.print("Enter the player's height in inches:    ");
-    String heightInInches = mReader.readLine();
-    System.out.print("Enter the player's previous experience:    ");
-    String previousExperience = mReader.readLine();
-    return new Team(player, heightInInches, previousExperience);
-}
+
+
+
