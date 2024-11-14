@@ -10,4 +10,7 @@ public class AllTeams {
 
     }
 
+    public void addAllTeams(String team) {
+    }
+
 }

@@ -1,15 +1,24 @@
-package com.teamtreehouse.model;
+//package com.teamtreehouse.model;
+
+import com.teamtreehouse.model.Player;
+import com.teamtreehouse.model.Players;
+import com.teamtreehouse.model.Team;
+import com.teamtreehouse.model.AllTeams;
 
 import java.util.*;
+
 
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class TeamSetup {
-    private AllTeams mAllTeams;
+    private static Object mTeamName;
+    private static Object mTeamCoach;
+    private static AllTeams mAllTeams;
     private static BufferedReader mReader;
     private static Map<String, String> mMenu;
+
     private List<Player> mPlayers;
 
 
@@ -29,11 +38,11 @@ public class TeamSetup {
 
     // Ask user what they want to do
     private static String promptAction() throws IOException {
-        System.out.printf("Menu");
+        System.out.printf("Menu %n");
         for (Map.Entry<String, String> option : mMenu.entrySet()) {
-            System.out.printf("%s - %s%n", option.getKey(), option.getValue());
+            System.out.printf("%s -> %s%n", option.getKey(), option.getValue());
         }
-        System.out.print("Select an option: ");
+        System.out.print("Select an option:  ");
         String choice = mReader.readLine();
         return choice.trim().toLowerCase();
     }
@@ -54,15 +63,33 @@ public class TeamSetup {
                 choice = promptAction();
                 switch (choice) {
                     case "create":
-                        Team team = promptNewTeam();
+                        String team = promptNewPlayer();
                         AllTeams.allTeams(team);
-                        System.out.printf("Team %s coached by %s has been added.", mTeamName, mTeamCoach);
-                }
+                        System.out.printf("Team %s coached by %s has been added. %n%n", team.getTeamName(), team.getTeamCoach());
+                    break;
+                    case "add":
+                        String player = promptNewPlayer();
+                        mAllTeams.addAllTeams(team);
 
+
+                }
             } catch (IOException ioe) {
                 System.out.println("Problem with input");
                 ioe.printStackTrace();
             }
         } while (!choice.equals("quit"));
     }
+}
+
+// Enter a new player
+private static String promptNewPlayer() throws IOException {
+    System.out.print("Enter the player's first name:    ");
+    String firstName = mReader.readLine();
+    System.out.print("Enter the player's last name:    ");
+    String lastName = mReader.readLine();
+    System.out.print("Enter the player's height in inches:    ");
+    String heightInInches = mReader.readLine();
+    System.out.print("Enter the player's previous experience:    ");
+    String previousExperience = mReader.readLine();
+    return new Team(player, heightInInches, previousExperience);
 }
