@@ -15,6 +15,7 @@ public class TeamSetup {
     private static Object mTeamCoach;
     private static AllTeams mAllTeams;
     private static BufferedReader mReader;
+    private static Object mAllTeam;
     private List<Player> mPlayers;
     private static Map<String, String> mMenu;
 
@@ -60,12 +61,18 @@ public class TeamSetup {
                 switch (choice) {
                     case "create":
                         Team team = promptNewTeam();
-                        mAllTeams.allTeam(team);
+                        mAllTeams.addTeam(team);
+                        // mAllTeams.AllTeam(team);
                         System.out.printf("Team %s coached by %s has been added. %n%n", team.getTeamName(), team.getTeamCoach());
                     break;
                     case "add":
                         String player = promptPlayer();
                         String teamPlayer = promptPlayer();
+
+
+                        //
+                        //String teamPlayer = promptPlayer();
+
                 }
             } catch (IOException ioe) {
                 System.out.println("Problem with input");
@@ -74,6 +81,12 @@ public class TeamSetup {
         } while (!choice.equals("quit"));
     }
 
+
+
+
+
+
+
     // Add an existing player
     private static String promptPlayer() throws IOException {
         System.out.println("Available Players: ");
@@ -81,8 +94,8 @@ public class TeamSetup {
         int index = promptForIndex(mPlayers);
         return mPlayers.get(index);
     }
-
-   /* private Team promptPlayerforTeam(String player) throws IOException {
+/*
+   private Team promptPlayerforTeam(String player) throws IOException {
         List<Team> teams = mAllTeams.getTeams(player);
 
 
