@@ -3,15 +3,15 @@ package com.teamtreehouse.model;
 import java.util.Set;
 import java.util.HashSet;
 
-public class Team implements Comparable<Team>{
+public class Team implements Comparable<Team> {
     private String mTeamName;
     private String mTeamCoach;
-    private Set<Player> mTeamPlayer;
+    private Set<Player> mTeamPlayers;
 
     public Team(String teamName, String teamCoach) {
         mTeamName = teamName;
         mTeamCoach = teamCoach;
-        mTeamPlayer= new HashSet<Player>();
+        mTeamPlayers = new HashSet<>();
     }
 
     public String getTeamName() {
@@ -19,23 +19,24 @@ public class Team implements Comparable<Team>{
     }
 
     public String getTeamCoach() {
-
         return mTeamCoach;
     }
 
-    public Set<Player> getTeamPlayer() {
-
-        return mTeamPlayer;
+    public Set<Player> getTeamPlayers() {
+        return mTeamPlayers;
     }
 
-    public String removePlayer() {
-        return removePlayer();
+    public void addPlayer(Player player) {
+        mTeamPlayers.add(player);
     }
 
-
+    public void removePlayer(Player player) {
+        mTeamPlayers.remove(player);
+    }
 
     @Override
-    public int compareTo(Team o) {
-        return 0;
+    public int compareTo(Team other) {
+        // Implemented comparison based on team name
+        return this.mTeamName.compareTo(other.mTeamName);
     }
 }

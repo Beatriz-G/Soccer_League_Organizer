@@ -3,57 +3,40 @@ package com.teamtreehouse.model;
 import java.util.*;
 
 public class AllTeams {
-    private Set<Team> mTeam;
+    private Set<Team> mTeams;
 
     public AllTeams() {
-        mTeam = new HashSet<>();
+        mTeams = new HashSet<>();
     }
 
     public List<Team> getTeams() {
-        List<Team> list = new ArrayList<>(mTeam);
+        List<Team> list = new ArrayList<>(mTeams);
         Collections.sort(list);
         return list;
     }
 
-    // shows list of players
+    // Adds a team and shows list of saved teams
     public void addTeam(Team team) {
-        mTeam.add(team);
-        System.out.printf("All saved teams: %n");
-        for (Team savedTeam : mTeam) {
-            System.out.printf("Team name: %s -- Coach Name %s %n%n", savedTeam.getTeamName(), savedTeam.getTeamCoach());
+        mTeams.add(team);
+        System.out.printf("All saved teams:%n");
+        for (Team savedTeam : mTeams) {
+            System.out.printf("Team name: %s -- Coach Name: %s %n", savedTeam.getTeamName(), savedTeam.getTeamCoach());
         }
     }
 
-    public int getPlayers() {
-        return 0;
-    }
-
-    private Map<String, List<Player>> byPlayer() {
-        Map<String, List<Player>> byPlayer = new TreeMap<>();
-        for (Team team : mTeam) {
-            List<Player> playerPlayer = byPlayer.get(Player.getPlayer());
-            if(playerPlayer == null) {
-                playerPlayer = new ArrayList<>();
-                byPlayer.put(Player.getPlayer(), playerPlayer);
+    // Gets a mapping from player names to the teams they are in
+    private Map<String, List<Team>> byPlayer() {
+        Map<String, List<Team>> byPlayer = new TreeMap<>();
+        for (Team team : mTeams) {
+            for (Player player : team.getTeamPlayers()) {
+                String playerName = player.getPlayer();
+                List<Team> teamsForPlayer = byPlayer.get(playerName);
+                if (teamsForPlayer == null) {
+                    teamsForPlayer = new ArrayList<>();
+                    byPlayer.put(playerName, teamsForPlayer);
+                }
+                teamsForPlayer.add(team);
             }
-            Player Player = null;
-            playerPlayer.add(Player);
-        }
-
-        return byPlayer;
-    }
-
-    // Saves name of player chosen
-    private Map<String, List<Player>> byPlayer() {
-        Map<String, List<Player>> byPlayer = new TreeMap<>();
-        for (Team team : mTeam) {
-            List<Player> playerPlayer = byPlayer.get(Player.getPlayer());
-            if (playerPlayer == null) {
-                playerPlayer = new ArrayList<>();
-                byPlayer.put(Player.getPlayer(), playerPlayer);
-            }
-            Player Player = null;
-            playerPlayer.add(Player);
         }
         return byPlayer;
     }
@@ -62,25 +45,7 @@ public class AllTeams {
         return byPlayer().keySet();
     }
 
-    public List<Team> getPlayersforTeam(String playerName) {
-        List<Player> teams = byPlayer().get(playerName);
-
+    public List<Team> getTeamsForPlayer(String playerName) {
+        return byPlayer().get(playerName);
     }
 }
-
-
-/*
-    public List<Team> getPlayersforTeam(String playerName) {
-        List<Player> teams = byPlayer().get(playerName);
-        teams.sort(new Comparator<Team>() {
-
-            @Override
-            public int compare(Team o1, Team o2) {
-                if (o1.equals(o2)) {
-                    return 0;
-                }
-                return o1.getTeamName().compareTo(o2.getTeamName());
-            }
-        });
-        return teams;
-    }*/

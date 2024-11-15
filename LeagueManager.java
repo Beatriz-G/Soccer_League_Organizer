@@ -1,9 +1,6 @@
 import com.teamtreehouse.model.Player;
 import com.teamtreehouse.model.Players;
-import com.teamtreehouse.model.AllTeams;
 import com.teamtreehouse.model.TeamSetup;
-
-
 
 public class LeagueManager {
 
@@ -13,9 +10,5 @@ public class LeagueManager {
 
     TeamSetup setup = new TeamSetup();
     setup.run();
-
-    // AllTeams allTeams = new AllTeams();
-    // TeamSetup setup  = new TeamSetup();
-    // TeamSetup.run();
   }
 }
