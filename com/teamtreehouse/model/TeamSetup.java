@@ -65,8 +65,8 @@ public class TeamSetup {
                         out.printf("Team %s coached by %s has been added. %n%n", team.getTeamName(), team.getTeamCoach());
                         break;
                     case "add":
-                        promptPlayer();
-
+                        //promptPlayer();
+                        showPlayers();
 
                 }
             } catch (IOException ioe) {
@@ -76,25 +76,7 @@ public class TeamSetup {
         } while (!choice.equals("quit"));
     }
 
-    // Add an existing player
-    private void promptPlayer() throws IOException {
-        out.println("Available Players: ");
-        List<Player> players = new ArrayList<>(mPlayers);
-        for (Player player : players) {
-            System.out.printf(" first name: %s last name: %s  height in inches: %d previous experience: %s %n",
-                    player.getFirstName(),
-                    player.getLastName(),
-                    player.getHeightInInches(),
-                    player.isPreviousExperience());
-
-        }
-//        int index = promptForIndex(mPlayers);
-//        return mPlayers.get(index);
-
-
-
-    }
-
+    // Add exisiting player
     private void showPlayers() {
         int i = 1;
         for (Player player : mPlayers) {
@@ -108,7 +90,6 @@ public class TeamSetup {
             i++;
         }
     }
-
 
     private Team promptPlayerforTeam(Player player) throws IOException {
         List<Team> teams = mAllTeams.getTeams();
