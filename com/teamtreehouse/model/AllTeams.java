@@ -39,18 +39,16 @@ public class AllTeams {
             Player Player = null;
             playerPlayer.add(Player);
         }
+
         return byPlayer;
     }
 
-
-
-
-/*
+    // Saves name of player chosen
     private Map<String, List<Player>> byPlayer() {
         Map<String, List<Player>> byPlayer = new TreeMap<>();
         for (Team team : mTeam) {
             List<Player> playerPlayer = byPlayer.get(Player.getPlayer());
-            if(playerPlayer == null) {
+            if (playerPlayer == null) {
                 playerPlayer = new ArrayList<>();
                 byPlayer.put(Player.getPlayer(), playerPlayer);
             }
@@ -58,7 +56,20 @@ public class AllTeams {
             playerPlayer.add(Player);
         }
         return byPlayer;
+    }
 
+    public Set<String> getPlayers() {
+        return byPlayer().keySet();
+    }
+
+    public List<Team> getPlayersforTeam(String playerName) {
+        List<Player> teams = byPlayer().get(playerName);
+
+    }
+}
+
+
+/*
     public List<Team> getPlayersforTeam(String playerName) {
         List<Player> teams = byPlayer().get(playerName);
         teams.sort(new Comparator<Team>() {
@@ -73,4 +84,3 @@ public class AllTeams {
         });
         return teams;
     }*/
-}

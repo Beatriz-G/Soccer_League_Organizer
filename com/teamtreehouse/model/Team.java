@@ -28,7 +28,9 @@ public class Team implements Comparable<Team>{
         return mTeamPlayer;
     }
 
-
+    public String removePlayer() {
+        return removePlayer();
+    }
 
 
 
