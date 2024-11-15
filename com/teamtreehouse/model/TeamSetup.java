@@ -10,17 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class TeamSetup {
-    private static Object mTeamName;
-    private static Object mTeamCoach;
-    private static AllTeams mAllTeams;
-    private static BufferedReader mReader;
-    private static Object mAllTeam;
-    private List<Player> mPlayers;
-    private static Map<String, String> mMenu;
+import static java.lang.System.out;
 
-    public TeamSetup(AllTeams allTeams) {
-        mAllTeams = allTeams;
+
+public class TeamSetup {
+    private  AllTeams mAllTeams;
+    private  BufferedReader mReader;
+    private List<Player> mPlayers;
+    private  Map<String, String> mMenu;
+
+    public TeamSetup() {
+        mAllTeams = new AllTeams();
         mReader = new BufferedReader(new InputStreamReader(System.in));
         mPlayers = new ArrayList<>(Arrays.asList(Players.load()));
         mMenu = new HashMap<>();
@@ -34,26 +34,26 @@ public class TeamSetup {
 
 
     // Ask user what they want to do
-    private static String promptAction() throws IOException {
-        System.out.printf("Menu %n");
+    private  String promptAction() throws IOException {
+        out.printf("Menu %n");
         for (Map.Entry<String, String> option : mMenu.entrySet()) {
-            System.out.printf("%s -> %s%n", option.getKey(), option.getValue());
+            out.printf("%s -> %s%n", option.getKey(), option.getValue());
         }
-        System.out.print("Select an option:  ");
+        out.print("Select an option:  ");
         String choice = mReader.readLine();
         return choice.trim().toLowerCase();
     }
 
     // Ask user what the new team name and coach should be
-    private static Team promptNewTeam() throws IOException {
-        System.out.print("What is the new team name?   ");
+    private Team promptNewTeam() throws IOException {
+        out.print("What is the new team name?   ");
         String mTeamName = mReader.readLine();
-        System.out.print("What is the coach name?  ");
+        out.print("What is the coach name?  ");
         String mTeamCoach = mReader.readLine();
         return new Team(mTeamName, mTeamCoach);
     }
 
-    public static void run() {
+    public void run() {
         String choice = "";
         do {
             try {
@@ -62,47 +62,72 @@ public class TeamSetup {
                     case "create":
                         Team team = promptNewTeam();
                         mAllTeams.addTeam(team);
-                        System.out.printf("Team %s coached by %s has been added. %n%n", team.getTeamName(), team.getTeamCoach());
-                    break;
+                        out.printf("Team %s coached by %s has been added. %n%n", team.getTeamName(), team.getTeamCoach());
+                        break;
                     case "add":
-                        String player = promptPlayer();
-                        String teamPlayer = promptPlayer();
+                        promptPlayer();
 
 
                 }
             } catch (IOException ioe) {
-                System.out.println("Problem with input");
+                out.println("Problem with input");
                 ioe.printStackTrace();
             }
         } while (!choice.equals("quit"));
     }
 
     // Add an existing player
-    private static String promptPlayer() throws IOException {
-        System.out.println("Available Players: ");
-        List<String> mPlayers = new ArrayList<>(mAllTeams.getPlayers());
-        int index = promptForIndex(mPlayers);
-        return mPlayers.get(index);
+    private void promptPlayer() throws IOException {
+        out.println("Available Players: ");
+        List<Player> players = new ArrayList<>(mPlayers);
+        for (Player player : players) {
+            System.out.printf(" first name: %s last name: %s  height in inches: %d previous experience: %s %n",
+                    player.getFirstName(),
+                    player.getLastName(),
+                    player.getHeightInInches(),
+                    player.isPreviousExperience());
+
+        }
+//        int index = promptForIndex(mPlayers);
+//        return mPlayers.get(index);
+
+
+
     }
 
-   private Team promptPlayerforTeam(String player) throws IOException {
-        List<Team> teams = mAllTeams.getTeams(player);
-        List<String> playerNames = new ArrayList<>();
-        for (Team team : teams) {
-            playerNames.add(team.getTeamName());
+    private void showPlayers() {
+        int i = 1;
+        for (Player player : mPlayers) {
+            System.out.printf("%d). first name: %s last name: %s  height in inches: %d previous experience: %s %n",
+                    i,
+                    player.getFirstName(),
+                    player.getLastName(),
+                    player.getHeightInInches(),
+                    player.isPreviousExperience());
+
+            i++;
         }
-        System.out.printf("Available players: %s", player);
+    }
+
+
+    private Team promptPlayerforTeam(Player player) throws IOException {
+        List<Team> teams = mAllTeams.getTeams();
+        List<Player> playerNames = new ArrayList<>();
+//        for (Team team : teams) {
+//            playerNames.add(team.getTeamName());
+//        }
+        out.printf("Available players: %s", player);
         int index = promptForIndex(playerNames);
         return teams.get(index);
     }
 
-    private static int promptForIndex(List<String> players) throws IOException {
+    private int promptForIndex(List<Player> players) throws IOException {
         int counter = 1;
-        for (String option : players) {
-            System.out.printf("%d.) %s %n", counter, option);
+        for (Player option : players) {
+            out.printf("%d.) %s %n", counter, option);
             counter++;
         }
-        System.out.printf("Your pick:  ");
+        out.printf("Your pick:  ");
         String optionAsString = mReader.readLine();
         int choice = Integer.parseInt(optionAsString.trim());
         return choice - 1;

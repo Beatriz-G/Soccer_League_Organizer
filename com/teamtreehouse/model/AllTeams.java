@@ -9,7 +9,7 @@ public class AllTeams {
         mTeam = new HashSet<>();
     }
 
-    public List<Team> getTeams(String player) {
+    public List<Team> getTeams() {
         List<Team> list = new ArrayList<>(mTeam);
         Collections.sort(list);
         return list;

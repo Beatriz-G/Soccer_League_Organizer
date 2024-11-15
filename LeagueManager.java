@@ -11,8 +11,11 @@ public class LeagueManager {
     Player[] players = Players.load();
     System.out.printf("There are currently %d registered players.%n", players.length);
 
-    AllTeams allTeams = new AllTeams();
-    TeamSetup setup  = new TeamSetup(allTeams);
-    TeamSetup.run();
+    TeamSetup setup = new TeamSetup();
+    setup.run();
+
+    // AllTeams allTeams = new AllTeams();
+    // TeamSetup setup  = new TeamSetup();
+    // TeamSetup.run();
   }
 }
